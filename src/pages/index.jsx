@@ -32,20 +32,21 @@ const IndexPage = () => {
   const { currentStep } = state;
   const nextStep = (questionaire, prefilled) => {
 
-    const actualQuestions = formSelected.filter(questions => (questions.step === currentStep && questions.currentTrack === trackSelected))
+    const [actualQuestions] = formSelected.filter(questions => (questions.step === currentStep && questions.currentTrack === trackSelected))
 
-    if (actualQuestions && actualQuestions[0] && actualQuestions[0].questions) {
 
-      const actualSingleQuestion = actualQuestions[0].questions.filter(question => question.nextTrack)
+    if (actualQuestions && actualQuestions.questions) {
 
-      if (actualSingleQuestion && actualSingleQuestion[0]) {
+      const [actualSingleQuestion] = actualQuestions.questions.filter(question => question.nextTrack)
 
-        const actualSingleQuestionPosition = actualQuestions[0].questions.indexOf(actualSingleQuestion[0])
+      if (actualSingleQuestion && actualSingleQuestion) {
+
+        const actualSingleQuestionPosition = actualQuestions.questions.indexOf(actualSingleQuestion)
         const questionReceived = prefilled[actualSingleQuestionPosition]
     
-        const idx = actualSingleQuestion[0].options.indexOf(questionReceived.answer)
+        const idx = actualSingleQuestion.options.indexOf(questionReceived.answer)
 
-        const nextTrack = actualSingleQuestion[0].nextTrack[idx]
+        const nextTrack = actualSingleQuestion.nextTrack[idx]
 
         setTrackSelected(nextTrack)
       }
@@ -56,10 +57,10 @@ const IndexPage = () => {
 
   const previousStep = () => {
 
-    const actualQuestions = formSelected.filter(questions => (questions.step === currentStep && questions.currentTrack === trackSelected))
+    const [actualQuestions] = formSelected.filter(questions => (questions.step === currentStep && questions.currentTrack === trackSelected))
 
-    if (actualQuestions && actualQuestions[0]) {
-      const prevTrack = actualQuestions[0].prevTrack
+    if (actualQuestions) {
+      const prevTrack = actualQuestions.prevTrack
       setTrackSelected(prevTrack)
     }
 
