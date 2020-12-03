@@ -27,36 +27,26 @@ const IndexPage = () => {
   const [state, setState] = useState(initialState);
   const [formSelected, setFormSelected] = useState()
   const [trackSelected, setTrackSelected] = useState('A')
-  const [stepGroupSelected, setStepGroupSelected] = useState()
+  // const [stepGroupSelected, setStepGroupSelected] = useState()
 
   const { currentStep } = state;
   const nextStep = (questionaire, prefilled) => {
-    console.log('Questionaire received')
-    console.log(questionaire)
-    console.log(prefilled)
-    console.log('End')
 
     const actualQuestions = formSelected.filter(questions => (questions.step === currentStep && questions.currentTrack === trackSelected))
-    console.log(actualQuestions)
 
     if (actualQuestions && actualQuestions[0] && actualQuestions[0].questions) {
 
       const actualSingleQuestion = actualQuestions[0].questions.filter(question => question.nextTrack)
-      console.log(actualSingleQuestion)
 
       if (actualSingleQuestion && actualSingleQuestion[0]) {
 
         const actualSingleQuestionPosition = actualQuestions[0].questions.indexOf(actualSingleQuestion[0])
-        console.log(actualSingleQuestionPosition)
         const questionReceived = prefilled[actualSingleQuestionPosition]
-        console.log(questionReceived)
-
+    
         const idx = actualSingleQuestion[0].options.indexOf(questionReceived.answer)
 
         const nextTrack = actualSingleQuestion[0].nextTrack[idx]
 
-        console.log('Next Track')
-        console.log(nextTrack)
         setTrackSelected(nextTrack)
       }
     }
@@ -67,12 +57,9 @@ const IndexPage = () => {
   const previousStep = () => {
 
     const actualQuestions = formSelected.filter(questions => (questions.step === currentStep && questions.currentTrack === trackSelected))
-    console.log('Prvious Step')
-    console.log(actualQuestions)
 
     if (actualQuestions && actualQuestions[0]) {
       const prevTrack = actualQuestions[0].prevTrack
-      console.log(prevTrack)
       setTrackSelected(prevTrack)
     }
 
