@@ -100,9 +100,6 @@ const IndexPage = () => {
     const [cardSelected] = formSelected.filter(stepObj => ((stepObj.step === currentStep) && (stepObj.currentTrack === trackSelected)))
     const maxSteps = stepGroupSelected.stepsNumber
 
-    console.log('Number')
-    console.log(formSelected)
-
     if (currentStep < maxSteps) {
 
       return (
@@ -142,7 +139,7 @@ const IndexPage = () => {
                   const steps = stepGroup.stepsNumber
 
                   return (
-                    <Button type='primary' onClick={() => {
+                    <Button key={QuestionConfig.indexOf(stepGroup)} type='primary' onClick={() => {
                       setFormSelected(form)
                       setStepGroupSelected(stepGroup)
                       setStepsNumber(steps)
