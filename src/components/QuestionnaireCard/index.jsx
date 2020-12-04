@@ -19,14 +19,17 @@ const Card = ({
 
   useEffect(() => {
 
-
     if (sessionStorage.getItem(storage)) {
       const prefilledAnswers = JSON.parse(sessionStorage.getItem(storage));
+      setState((prevState) => ({ ...prevState, prefilledAnswers }));
+    } else {
+      
+      const prefilledAnswers = [];
       setState((prevState) => ({ ...prevState, prefilledAnswers }));
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [storage]);
 
   const handleChange = (key, value) => {
     const { questionsAnswered, prefilledAnswers } = state;

@@ -13,7 +13,6 @@ import PersonalQuestionCard from '../components/PersonalQuestionCard';
 import ThankYou from '../components/ThankYou';
 
 import QuestionConfig from '../QuestionConfig';
-import { StepGroupB } from '../QuestionConfig'
 import './style.less';
 import apiDataFormer from '../services/apiDataFormer';
 import LeftBanner from '../components/LeftBanner';
@@ -27,10 +26,12 @@ const IndexPage = () => {
   const [state, setState] = useState(initialState);
   const [formSelected, setFormSelected] = useState()
   const [trackSelected, setTrackSelected] = useState('A')
-  // const [stepGroupSelected, setStepGroupSelected] = useState()
+  const [stepGroupSelected, setStepGroupSelected] = useState()
+  const [stepsNumber, setStepsNumber] = useState()
 
   const { currentStep } = state;
-  const nextStep = (questionaire, prefilled) => {
+
+  function goToNextTrack(prefilled) {
 
     const [actualQuestions] = formSelected.filter(questions => (questions.step === currentStep && questions.currentTrack === trackSelected))
 
@@ -43,26 +44,36 @@ const IndexPage = () => {
 
         const actualSingleQuestionPosition = actualQuestions.questions.indexOf(actualSingleQuestion)
         const questionReceived = prefilled[actualSingleQuestionPosition]
-    
-        const idx = actualSingleQuestion.options.indexOf(questionReceived.answer)
 
-        const nextTrack = actualSingleQuestion.nextTrack[idx]
+        const answerPosition = actualSingleQuestion.options.indexOf(questionReceived.answer)
+
+        const nextTrack = actualSingleQuestion.nextTrack[answerPosition]
 
         setTrackSelected(nextTrack)
       }
     }
+  }
 
-    setState((prevState) => ({ ...prevState, currentStep: currentStep + 1, questionaire: [...prevState.questionaire, ...questionaire] }));
-  };
-
-  const previousStep = () => {
-
+  function goToPreviousTrack() {
     const [actualQuestions] = formSelected.filter(questions => (questions.step === currentStep && questions.currentTrack === trackSelected))
 
     if (actualQuestions) {
       const prevTrack = actualQuestions.prevTrack
       setTrackSelected(prevTrack)
     }
+
+  }
+
+  const nextStep = (questionaire, prefilled) => {
+
+    goToNextTrack(prefilled)
+
+    setState((prevState) => ({ ...prevState, currentStep: currentStep + 1, questionaire: [...prevState.questionaire, ...questionaire] }));
+  };
+
+  const previousStep = () => {
+
+    goToPreviousTrack()
 
     setState((prevState) => ({ ...prevState, currentStep: currentStep - 1 }));
   };
@@ -84,6 +95,26 @@ const IndexPage = () => {
     });
   };
 
+
+  const renderStepGroup = (formSelected, stepGroupSelected) => {
+    const [cardSelected] = formSelected.filter(stepObj => ((stepObj.step === currentStep) && (stepObj.currentTrack === trackSelected)))
+    const maxSteps = stepGroupSelected.stepsNumber
+
+    console.log('Number')
+    console.log(formSelected)
+
+    if (currentStep < maxSteps) {
+
+      return (
+        <Card questions={cardSelected.questions} nextStep={nextStep} previousHide={!cardSelected.step} previousStep={previousStep} stepNumber={currentStep} storage={cardSelected.key} />
+      )
+    } else {
+      return (
+        <PersonalQuestionCard questions={[]} nextStep={finalStep} previousStep={previousStep} />
+      )
+    }
+  }
+
   useEffect(() => {
 
     sessionStorage.clear()
@@ -101,62 +132,52 @@ const IndexPage = () => {
             <h2>Select Form</h2>
 
             <div>
-              <Button type='primary'>
-                HOME
-              </Button>
-              <Button type='primary' onClick={() => setFormSelected(QuestionConfig)}>
-                FORM
-              </Button>
-              <Button type='primary' onClick={() => setFormSelected(StepGroupB)}>
-                FORM 2
-              </Button>
+              {
+                QuestionConfig.map(stepGroup => {
+
+                  const title = stepGroup.title
+                  const form = stepGroup.form
+                  const steps = stepGroup.stepsNumber
+
+                  return (
+                    <Button type='primary' onClick={() => {
+                      setFormSelected(form)
+                      setStepGroupSelected(stepGroup)
+                      setStepsNumber(steps)
+                    }}>
+                      {title}
+                    </Button>
+                  )
+                })
+              }
             </div>
           </div>
           :
-          formSelected === StepGroupB ?
+          
             <Row gutter={[100, 40]} justify="center">
-              {currentStep !== 6 && (
-                <>
-                  <LeftBanner />
-                  <Col xs={24} sm={24} md={24} lg={12} className="textCenter minQuestionareWidth">
-                    <Progress percent={(currentStep + 1) * 14} showInfo status="active" style={{ marginBottom: '2rem' }} />
-                    {currentStep === 0 && <Card questions={StepGroupB[0].questions} nextStep={nextStep} previousHide previousStep={previousStep} stepNumber={currentStep} storage={StepGroupB[0].key} />}
-                    {currentStep === 1 && <Card questions={StepGroupB[1].questions} nextStep={nextStep} previousStep={previousStep} stepNumber={currentStep} storage={StepGroupB[1].key} />}
-                    {currentStep === 2 && <Card questions={StepGroupB[2].questions} nextStep={nextStep} previousStep={previousStep} stepNumber={currentStep} storage={StepGroupB[2].key} />}
-                    {currentStep === 3 && trackSelected === 'B' && <Card questions={StepGroupB[3].questions} nextStep={nextStep} previousStep={previousStep} storage={StepGroupB[3].key} stepNumber={currentStep} />}
-                    {currentStep === 3 && trackSelected === 'C' && <Card questions={StepGroupB[4].questions} nextStep={nextStep} previousStep={previousStep} storage={StepGroupB[4].key} stepNumber={currentStep} />}
-                    {currentStep === 4 && trackSelected === 'B' && <Card questions={StepGroupB[5].questions} nextStep={nextStep} previousStep={previousStep} storage={StepGroupB[5].key} stepNumber={currentStep} />}
-                    {currentStep === 4 && trackSelected === 'C' && <Card questions={StepGroupB[6].questions} nextStep={nextStep} previousStep={previousStep} storage={StepGroupB[6].key} stepNumber={currentStep} />}
-                    {currentStep === 5 && <PersonalQuestionCard questions={[]} nextStep={finalStep} previousStep={previousStep} />}
-                  </Col>
-                </>
-              )}
-              {
-                currentStep === 6 && (
-                  <ThankYou />
-                )
-              }
-            </Row>
-            :
 
-            <Row gutter={[100, 40]} justify="center">
-              {currentStep !== 3 && (
+              <Button type='primary' onClick={() => setFormSelected()}>
+                HOME
+              </Button>
+
+              {currentStep !== (stepsNumber + 1) && (
                 <>
                   <LeftBanner />
                   <Col xs={24} sm={24} md={24} lg={12} className="textCenter minQuestionareWidth">
-                    <Progress percent={(currentStep + 1) * 33} showInfo status="active" style={{ marginBottom: '2rem' }} />
-                    {currentStep === 0 && <Card questions={QuestionConfig[0].questions} nextStep={nextStep} previousHide previousStep={previousStep} storage={QuestionConfig[0].key} stepNumber={currentStep} />}
-                    {currentStep === 1 && <Card questions={QuestionConfig[1].questions} nextStep={nextStep} previousStep={previousStep} storage={QuestionConfig[1].key} stepNumber={currentStep} />}
-                    {currentStep === 2 && <PersonalQuestionCard questions={[]} nextStep={finalStep} previousStep={previousStep} />}
+                    <Progress percent={(currentStep + 1) * (parseInt(100/(stepsNumber + 1)))} showInfo status="active" style={{ marginBottom: '2rem' }} />
+                    {
+                      renderStepGroup(formSelected, stepGroupSelected)
+                    }
                   </Col>
                 </>
               )}
               {
-                currentStep === 3 && (
+                currentStep === (stepsNumber + 1) && (
                   <ThankYou />
                 )
               }
             </Row>
+            
       }
     </Container>
   );

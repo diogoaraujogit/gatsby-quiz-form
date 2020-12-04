@@ -16,6 +16,10 @@ Iniciando o servidor local
 
    O site pode ser acessado em: `http://localhost:8000/`
 
+Netlify
+
+https://quiz-react.netlify.app/
+
 
 
 
