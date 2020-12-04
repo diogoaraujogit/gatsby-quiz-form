@@ -118,8 +118,8 @@ const IndexPage = () => {
   useEffect(() => {
 
     sessionStorage.clear()
-    setState((prevState) => ({ ...prevState, currentStep: 0}));
-  
+    setState((prevState) => ({ ...prevState, currentStep: 0 }));
+
 
   }, [formSelected])
 
@@ -155,18 +155,17 @@ const IndexPage = () => {
             </div>
           </div>
           :
-          
-            <Row gutter={[100, 40]} justify="center">
-
-              <Button type='primary' onClick={() => setFormSelected()}>
-                HOME
+          <>
+            <Button type='primary' onClick={() => setFormSelected()} style={{marginBottom: '2rem'}}>
+              HOME
               </Button>
 
+            <Row gutter={[100, 40]} justify="center">
               {currentStep !== (stepsNumber + 1) && (
                 <>
                   <LeftBanner />
                   <Col xs={24} sm={24} md={24} lg={12} className="textCenter minQuestionareWidth">
-                    <Progress percent={(currentStep + 1) * (parseInt(100/(stepsNumber + 1)))} showInfo status="active" style={{ marginBottom: '2rem' }} />
+                    <Progress percent={(currentStep + 1) * (parseInt(100 / (stepsNumber + 1)))} showInfo status="active" style={{ marginBottom: '2rem' }} />
                     {
                       renderStepGroup(formSelected, stepGroupSelected)
                     }
@@ -179,7 +178,7 @@ const IndexPage = () => {
                 )
               }
             </Row>
-            
+          </>
       }
     </Container>
   );
