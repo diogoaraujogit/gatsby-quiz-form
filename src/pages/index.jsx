@@ -118,6 +118,8 @@ const IndexPage = () => {
   useEffect(() => {
 
     sessionStorage.clear()
+    setState((prevState) => ({ ...prevState, currentStep: 0}));
+  
 
   }, [formSelected])
 
