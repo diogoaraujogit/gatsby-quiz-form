@@ -10,11 +10,11 @@ The entire code structure of the project already existed and I was responsible f
 
 
 ## Tools and Technologies
-React
-Gatsby
-Javascript
-LESS
-Hooks
+- React
+- Gatsby
+- Javascript
+- LESS
+- Hooks
 
 ## Preview
 
