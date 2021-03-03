@@ -3,7 +3,8 @@ Conjunto de formulários feito em Gatsby onde, em algumas perguntas-chave, o usu
 
 Exemplo: o usuário deve escolher se está procurando um iPhone ou um Macbook e então as perguntas seguintes a essa serão de acordo com essa resposta.
 
-<iframe width="853" height="480" src="https://www.youtube.com/embed/ZH4ZDz8j930" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+https://user-images.githubusercontent.com/51061974/109830835-3b8a2a00-7c15-11eb-8011-74a5356428f8.mp4
+
 
 Toda a estrura de código do formulário já existia e eu fui responsável em fazer apenas as mudanças necessárias para que esse projeto pudesse receber diferentes formulários, que o usuário possa escolher entre eles e que cada formulário possa ter trilhas diferentes.
 
