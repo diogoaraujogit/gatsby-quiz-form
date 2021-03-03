@@ -18,6 +18,8 @@ The entire code structure of the project already existed and I was responsible f
 
 ## Preview
 
+Check out the video by clicking on the thumbnail. (YouTube)
+
 [![Preview](http://img.youtube.com/vi/ZH4ZDz8j930/0.jpg)](http://www.youtube.com/watch?v=ZH4ZDz8j930 "Gatsby")
 
 ## Instructions
