@@ -27,7 +27,7 @@ Check out the video by clicking on the thumbnail. (YouTube)
 ## Instructions
 
 #### Netlify
-Uma versão dessa aplicação está hospedada no Netlify, para acessá-la basta utilizar o link abaixo: 
+A version of this application is hosted on Netlify, to access it just use the link below: 
 https://quiz-react.netlify.app/
 
 #### Run Local
