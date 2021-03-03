@@ -1,12 +1,12 @@
 ## Description
-Conjunto de formulários feito em Gatsby onde, em algumas perguntas-chave, o usuário é direcionado para diferentes formulários de acordo com sua resposta nessa pergunta-chave.
+Group of forms made in Gatsby where, in some key questions, the user is directed to different forms according to their answer in that key question.
 
-Exemplo: o usuário deve escolher se está procurando um iPhone ou um Macbook e então as perguntas seguintes a essa serão de acordo com essa resposta.
+Example: the user must choose whether they are looking for an iPhone or a MacBook and then following questions to this one will be according to this answer. Check it out in the video.
 
-https://user-images.githubusercontent.com/51061974/109830835-3b8a2a00-7c15-11eb-8011-74a5356428f8.mp4
+[![Preview](http://img.youtube.com/vi/ZH4ZDz8j930/0.jpg)](http://www.youtube.com/watch?v=ZH4ZDz8j930 "Gatsby")
 
 
-Toda a estrura de código do formulário já existia e eu fui responsável em fazer apenas as mudanças necessárias para que esse projeto pudesse receber diferentes formulários, que o usuário possa escolher entre eles e que cada formulário possa ter trilhas diferentes.
+The entire code structure of the project already existed and I was responsible for making only the necessary changes so that this project could receive different forms, so that the user can choose between them and so that each form can have different tracks.
 
 
 ## Tools and Technologies
@@ -17,36 +17,30 @@ LESS
 Hooks
 
 ## Preview
-Videos / Imagens/ Gifs
-(e/ou Link pro Portfolio)
-(imagens passar pelo tiny)
 
-Como rodar
-(netlify se tiver)
+[![Preview](http://img.youtube.com/vi/ZH4ZDz8j930/0.jpg)](http://www.youtube.com/watch?v=ZH4ZDz8j930 "Gatsby")
 
 ## Instructions
 
-## Para iniciar o projeto
-
-Execute os comandos abaixo de dentro da pasta do projeto
-
-Instalando as dependências
-
-   ```bash
-   npm install
-   ```
- 
-Iniciando o servidor local
-
-   ```bash
-   gatsby develop
-   ```
-
-   O site pode ser acessado em: `http://localhost:8000/`
-
-Netlify
-
+#### Netlify
+Uma versão dessa aplicação está hospedada no Netlify, para acessá-la basta utilizar o link abaixo: 
 https://quiz-react.netlify.app/
+
+#### Run Local
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
+
+Installation:
+
+`npm install`   
+
+To Start Server:
+
+`gatsby develop`  
+
+To Visit App:
+
+`localhost:8000`
+
 
 
 
